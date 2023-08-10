@@ -11,6 +11,11 @@ app.use(express.json()); // Habilita el uso de JSON en el cuerpo de las solicitu
 const translateRoutes = require("./translateRoutes"); // Importa las rutas
 app.use("/api", translateRoutes);
 
+//Errores
+app.use((err, req, res, next) => {
+    console.error("[error]", err);
+});
+
 // Manejo de errores globales
 app.use((err, req, res, next) => {
     console.error(err.stack);
