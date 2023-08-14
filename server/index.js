@@ -1,10 +1,16 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
+const corsOptions = {
+    origin: process.env.URL || `http://localhost:${PORT}`, // Cambia esto al dominio real del frontend
+    methods: "POST",
+};
 
 // Middleware
-app.use(cors()); // Habilita CORS para permitir solicitudes desde el frontend
+app.use(cors(corsOptions)); // Habilita CORS para permitir solicitudes desde el frontend
 app.use(express.json()); // Habilita el uso de JSON en el cuerpo de las solicitudes
 
 // Rutas
