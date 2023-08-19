@@ -33,7 +33,8 @@ const openai_request = async (prompt, isTextToGit) => {
 
         return JSON.parse(response.data.choices[0].message.content);
     } catch (error) {
-        throw new Error("[Error] OpenAI request failed: " + error.message);
+        console.error("[Error] OpenAI request failed: " + error.message);
+        throw new Error("OpenAI request failed");
     }
 };
 
