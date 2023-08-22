@@ -19,6 +19,7 @@ app.use("/api/translate", translateRoutes);
 
 //Errores
 app.use((err, req, res, next) => {
+    res.status(500).json({ error: "Server error" });
     console.error("[error]", err);
 });
 

@@ -1,48 +1,41 @@
-const openai = require("./config/openaiConfig");
+const { generate_text } = require("./config/openaiConfig");
 
 const generate_prompt = (prompt, isTextToGit) => {
     return `
     Provide the equivalent ${
         isTextToGit ? "Git command" : "text"
-    } for "${prompt}" as just JSON:
-
-Example:
-{
-    text: Undo the last commit but keep the changes.
-    command: git reset HEAD~1
-}
-{
-    text: Switch to the production branch.
-    command: git checkout production.
-}
-
-    `;
-};
-
-const openai_request = async (prompt, isTextToGit) => {
-    try {
-        const response = await openai.createChatCompletion({
-            model: "gpt-3.5-turbo",
-            messages: [
-                {
-                    role: "user",
-                    content: generate_prompt(prompt, isTextToGit),
-                },
-            ],
-        });
-
-        return JSON.parse(response.data.choices[0].message.content);
-    } catch (error) {
-        console.error("[Error] OpenAI request failed: " + error.message);
-        throw new Error("OpenAI request failed");
+    } for "${prompt}" as JSON:
+    Format answer:
+    {
+        "text": ${isTextToGit ? prompt : ""},
+        "command": ${isTextToGit ? "" : prompt}
     }
+    Example 1:
+    {
+        "text": Undo the last commit but keep the changes.
+        "command": git reset HEAD~1
+    }
+    Example 2:
+    {
+        "text": Switch to the production branch.
+        "command": git checkout production.
+    }
+        `;
 };
 
-const textToCommand = async (text) =>
-    (await openai_request(text, true)).command;
+const textToCommand = async (text) => {
+    const prompt = generate_prompt(text, true);
+    const res = await generate_text(prompt);
 
-const commandToText = async (command) =>
-    (await openai_request(command, false)).text;
+    return res.command;
+};
+
+const commandToText = async (command) => {
+    const prompt = generate_prompt(command, false);
+    const res = await generate_text(prompt);
+
+    return res.text;
+};
 
 module.exports = {
     textToCommand,

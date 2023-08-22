@@ -13,4 +13,25 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-module.exports = openai;
+const generate_text = async (prompt) => {
+    try {
+        const response = await openai.createChatCompletion({
+            model: "gpt-3.5-turbo",
+            temperature: 0.6,
+            max_tokens: 200,
+            messages: [
+                {
+                    role: "user",
+                    content: prompt,
+                },
+            ],
+        });
+
+        return JSON.parse(response.data.choices[0].message.content);
+    } catch (error) {
+        console.error("[Error] OpenAI request failed: " + error.message);
+        throw new Error("OpenAI request failed");
+    }
+};
+
+module.exports = { generate_text };
