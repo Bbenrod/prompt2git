@@ -30,33 +30,31 @@ export default function App() {
 
 	return (
 		<div className='flex items-center justify-center min-h-screen bg-black'>
-			<div className='w-full max-w-4xl max-h-52 p-1 bg-white rounded-lg shadow-md flex items-center'>
-				<div className='relative flex-grow'>
-					<input type="text" className='w-full h-12 pr-12 pl-3 border border-gray-700 rounded text-white bg-gray-900'	value={areInputsSwapped ? input2Value : input1Value}
+			<div className='h-52 w-full max-w-4xl p-2 bg-gray-800 rounded-lg shadow-md flex items-center justify-between'>
+				<div className='flex flex-col h-full bg-gray-700 rounded p-2 w-5/12'>
+					<label for='inputText' className='block font-medium text-gray-700 dark:text-gray-200 mb-2'>Lenguaje humano</label>
+					<textarea className='w-full h-full py-2 px-3 rounded text-white bg-gray-900'	value={areInputsSwapped ? input2Value : input1Value}
 						onChange={(e) =>
 							areInputsSwapped
 								? setInput2Value(e.target.value)
 								: setInput1Value(e.target.value)
 						}/>
-					<button	className='absolute top-0 right-0 h-full px-4 text-white bg-blue-500 border-l border-blue-500 rounded-r' onClick={handleConvertClick}>
-						Convert
-					</button>
+					<button	className='h-1/5 w-1/3 text-white bg-blue-500 rounded mt-2 self-end' onClick={handleConvertClick}>Convert</button>
 				</div>
 
-				<button	className='w-12 h-12 mx-2 text-white bg-blue-500 border border-blue-500 rounded-full flex items-center justify-center' onClick={handleTurnClick}>
+				<button	className='w-10 h-10 mx-2 text-white bg-blue-500 border border-blue-500 rounded-full flex items-center justify-center' onClick={handleTurnClick}>
 					<span className="transform rotate-90">➜</span>
 				</button>
 
-				<div className='relative flex-grow'>
-					<input type="text" className='w-full h-12 pr-12 pl-3 border border-gray-700 rounded text-white bg-gray-900'	value={areInputsSwapped ? input1Value : input2Value}
+				<div className='flex flex-col h-full bg-gray-700 rounded p-2 w-5/12'>
+					<label for='inputText' className='block font-medium text-gray-700 dark:text-gray-200 mb-2'>Git prompt</label>
+					<textarea className='w-full h-full py-2 px-3 rounded text-white bg-gray-900'	value={areInputsSwapped ? input2Value : input1Value}
 						onChange={(e) =>
 							areInputsSwapped
-								? setInput1Value(e.target.value)
-								: setInput2Value(e.target.value)
+								? setInput2Value(e.target.value)
+								: setInput1Value(e.target.value)
 						}/>
-					<button	className='absolute top-0 right-0 h-full px-4 text-white bg-blue-500 border-l border-blue-500 rounded-r'onClick={handleConvertClick}>
-						Convert
-					</button>
+					<button	className='h-1/5 w-1/3 text-white bg-blue-500 rounded mt-2 self-end' onClick={handleConvertClick}>Copy</button>
 				</div>
 			</div>
 		</div>
