@@ -30,8 +30,7 @@ export default function App() {
 
 	return (
 		<div className='flex items-center justify-center min-h-screen bg-black'>
-			<div className='w-full max-w-md p-1 bg-white rounded-lg shadow-md flex items-center'>
-
+			<div className='w-full max-w-4xl max-h-52 p-1 bg-white rounded-lg shadow-md flex items-center'>
 				<div className='relative flex-grow'>
 					<input type="text" className='w-full h-12 pr-12 pl-3 border border-gray-700 rounded text-white bg-gray-900'	value={areInputsSwapped ? input2Value : input1Value}
 						onChange={(e) =>
@@ -59,7 +58,6 @@ export default function App() {
 						Convert
 					</button>
 				</div>
-
 			</div>
 		</div>
   	);
