@@ -5,7 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
-    origin: process.env.URL || `http://localhost:${PORT}`, // Cambia esto al dominio real del frontend
+    origin: process.env.URL || `http://localhost:${5173}`, // Cambia esto al dominio real del frontend
     methods: "POST",
 };
 

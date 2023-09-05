@@ -7,11 +7,11 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "prepare": "cd server && npm install  ",
+    "prepare": "cd server && npm install && cd ../app && npm install ",
     "start": "npm run start:both",
     "start:both": "concurrently \"npm run start:server\" \"npm run start:frontend\"",
     "start:server": "cd server && npm start",
-    "start:frontend": "cd frontend && npm start",
+    "dev:app": "cd app && npm run dev",
     "dev:server": "cd server && npm run dev"
   }
 }
