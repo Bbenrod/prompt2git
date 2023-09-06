@@ -5,7 +5,7 @@ import './index.css';
 function toggleDarkMode() {
     // Obtén el elemento <html> actual
     const htmlElement = document.querySelector('html');
-  
+
     // Cambia la clase de 'light' a 'dark' o viceversa
     if (htmlElement.classList.contains('light')) {
         htmlElement.classList.remove('light');
@@ -17,7 +17,11 @@ function toggleDarkMode() {
 }
 
 export const translateTextToCommand = async (text) => {
-    return text.replace(/[aeiouAEIOU]/g, "x");
+    return text.replace(/[aeiouAEIOU]/g, 'x');
+};
+
+export const translateCommandToText = async (command) => {
+    return command.replace(/[aeiouAEIOU]/g, 'y');
 };
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -31,6 +35,7 @@ export default function App() {
     const [isInputGitEditable, setIsInputGitEditable] = useState(false);
     const [inputPromptText, setInputPromptText] = useState('');
     const [inputGitText, setInputGitText] = useState('');
+    const [isFieldsSwapped, setIsFieldsSwapped] = useState(false); // Estado para rastrear el intercambio
 
     const handleVersionChange = () => {
         // Cambia el estado de dark mode
@@ -41,11 +46,32 @@ export default function App() {
     };
 
     const handleGenerateClick = async () => {
-        // Realiza la traducción del texto del inputPrompt al inputGit
-        const translatedText = await translateTextToCommand(inputPromptText);
-        setInputGitText(translatedText);
-        setIsInputGitEditable(true);
+        if (!isFieldsSwapped) {
+            // Traduce el texto de inputPrompt a inputGit
+            const translatedText = await translateTextToCommand(inputPromptText);
+            setInputGitText(translatedText);
+            setIsInputGitEditable(true);
+        } else {
+            // Traduce el texto de inputGit a inputPrompt
+            const translatedText = await translateCommandToText(inputGitText);
+            setInputPromptText(translatedText);
+            setIsInputGitEditable(false);
+        }
     };
+
+    const handleSwapFields = () => {
+        // Cambia el estado de intercambio y borra los textos
+        setIsFieldsSwapped(!isFieldsSwapped);
+        setInputPromptText('');
+        setInputGitText('');
+        setIsInputGitEditable(!isFieldsSwapped); // Cambia la edición de inputGit
+    };
+
+    // Determina los nombres y títulos de los campos según el estado de intercambio
+    const inputPromptTitle = isFieldsSwapped ? 'Git' : 'Lenguaje humano';
+    const inputGitTitle = isFieldsSwapped ? 'Lenguaje humano' : 'Git';
+    const inputPromptPlaceholder = isFieldsSwapped ? 'Ingresa tus líneas de git' : 'Ingresa tu prompt';
+    const inputGitPlaceholder = isFieldsSwapped ? '¿Qué significa ese código?' : 'Tu prompt en código git';
 
     return (
         <div className={`bg-${isDarkMode ? 'git-brown' : 'git-white'} text-${isDarkMode ? 'white' : 'git-brown'} font-sans transition-colors`}>
@@ -73,9 +99,9 @@ export default function App() {
                             <form className='rounded-xl bg-white container-w-gradient-border p-3 h-full w-full shadow-md'>
                                 <div className='flex flex-col h-full'>
                                     <label htmlFor='inputText' className='block font-medium mb-2 text-gray-700'>
-                                        Lenguaje Humano
+                                        {inputPromptTitle}
                                     </label>
-                                    <textarea className='appearance-none border-0 rounded-lg w-full py-2 px-3 bg-gray-50 text-gray-700 leading-tight focus:outline-none focus:shadow-outline shadow-md' id='inputPrompt' rows={3} placeholder='Ingresa tu prompt' value={inputPromptText} onChange={(e) => setInputPromptText(e.target.value)} readOnly={isInputGitEditable} />
+                                    <textarea className='appearance-none border-0 rounded-lg w-full py-2 px-3 bg-gray-50 text-gray-700 leading-tight focus:outline-none focus:shadow-outline shadow-md' id='inputPrompt' rows={3} placeholder={inputPromptPlaceholder} value={inputPromptText} onChange={(e) => setInputPromptText(e.target.value)} readOnly={isInputGitEditable}/>
                                     <div className='flex items-center justify-end my-3 last:mb-0 space-x-10'>
                                         <button type='button' className='cursor-pointer py-2 px-4 bg-git-orange rounded-full shadow-2xl flex flex-row' onClick={handleGenerateClick} disabled={isInputGitEditable}>
                                             <div className='relative text-sm font-semibold font-inter text-white text-center inline-block mx-auto'>Generar</div>
@@ -86,7 +112,9 @@ export default function App() {
                         </div>
                         <div>
                             <div className='flex items-center md:h-full'>
-                                <button className='flex items-center justify-center  bg-git-orange rounded-full cursor-pointer mx-auto h-8 w-8' id='btn_switch'>
+                                <button
+                                    className='flex items-center justify-center  bg-git-orange rounded-full cursor-pointer mx-auto h-8 w-8'
+                                    id='btn_switch' onClick={handleSwapFields}>
                                     <img src='public/switch.svg' alt='Switch' className='w-4 h-4 md:w-4 md:h-4' id='iconSwitch' />
                                 </button>
                             </div>
@@ -95,9 +123,9 @@ export default function App() {
                             <form className='rounded-xl bg-white container-w-gradient-border p-3 h-full w-full shadow-md'>
                                 <div className='flex flex-col h-full'>
                                     <label htmlFor='inputText' className='block font-medium mb-2 text-gray-700'>
-                                        Git
+                                        {inputGitTitle}
                                     </label>
-                                    <textarea className='appearance-none border-0 rounded-lg w-full py-2 px-3 bg-gray-50 text-gray-700 leading-tight focus:outline-none focus:shadow-outline shadow-md' id='inputGit' rows={3} placeholder='Tu prompt en git' value={inputGitText} readOnly={!isInputGitEditable} />
+                                    <textarea className='appearance-none border-0 rounded-lg w-full py-2 px-3 bg-gray-50 text-gray-700 leading-tight focus:outline-none focus:shadow-outline shadow-md' id='inputGit' rows={3} placeholder={inputGitPlaceholder} value={inputGitText} readOnly={!isInputGitEditable} onChange={(e) => setInputGitText(e.target.value)} />
                                     <div className='flex items-center justify-between my-3 last:mb-0 space-x-10'>
                                         <button type='button' className='cursor-pointer py-2 px-4 bg-gray-100 rounded-full shadow-2xl flex flex-row'>
                                             <div className='relative text-sm font-semibold font-inter text-white text-center inline-block mx-auto'>
