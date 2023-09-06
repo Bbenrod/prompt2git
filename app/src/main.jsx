@@ -74,13 +74,13 @@ export default function App() {
 
     return (
         <div
-            className={`bg-${isDarkMode ? "git-brown" : "git-white"} text-${
-                isDarkMode ? "white" : "git-brown"
+            className={`${isDarkMode ? "bg-git-brown-90" : "bg-git-white"} ${
+                isDarkMode ? "text-git-brown" : "text-git-white"
             } font-sans transition-colors`}
         >
             <div className="max-w-4xl mx-auto px-4">
                 <div className="flex flex-col items-center justify-center min-h-screen">
-                    <header className="flex flex-col sm:flex-row sm:justify-center w-full pt-4 pb-8 px-2">
+                    <header className={`flex flex-col sm:flex-row sm:justify-center w-full pt-4 pb-8 px-2 text-${isDarkMode ? "git-white" : "git-brown"}`}>
                         <a className="flex flex-col" href="/">
                             <h1 className="flex font-sans font-bold sm:text-xl tracking-tight justify-center">
                                 Prompt2Git
@@ -92,8 +92,9 @@ export default function App() {
                     </header>
                     <div>
                         <button
-                            className={`flex items-center justify-center absolute top-2.5 right-4 text-gray-500 focus:outline-none hover:scale-125 transition w-8 h-8 bg-${
-                                isDarkMode ? "git-white" : "git-orange"
+                            className={`flex items-center justify-center absolute top-2.5 right-4 text-gray-500 focus:outline-none hover:scale-125 transition w-8 h-8
+                            ${
+                                isDarkMode ? "bg-git-white" : "bg-git-orange"
                             } rounded-full`}
                             id="btn_version"
                             onClick={handleVersionChange}
@@ -110,44 +111,67 @@ export default function App() {
                             />
                         </button>
                         <button
-                            className="flex items-center justify-center absolute top-2.5 right-16 text-gray-500 focus:outline-none hover:scale-125 transition w-8 h-8 bg-git-orange rounded-full"
+                            className={`flex items-center justify-center absolute top-2.5 right-16 text-gray-500 focus:outline-none hover:scale-125 transition w-8 h-8 
+                            ${
+                               isDarkMode ? "bg-git-white" : "bg-git-orange"
+                            } rounded-full`}
                             id="btn_coffee"
                         >
                             <img
                                 className="w-4 h-4"
-                                src="public/coffee.svg"
+                                src={`${
+                                    isDarkMode
+                                        ? "public/coffeeDark.svg"
+                                        : "public/coffee.svg"
+                                }`}
                                 id="iconCoffee"
                                 alt="Coffee"
                             />
                         </button>
                         <button
-                            className="flex items-center justify-center absolute top-2.5 right-28 text-gray-500 focus:outline-none hover:scale-125 transition w-8 h-8 bg-git-orange rounded-full"
+                            className={`flex items-center justify-center absolute top-2.5 right-28 text-gray-500 focus:outline-none hover:scale-125 transition w-8 h-8 
+                            ${
+                                isDarkMode ? "bg-git-white" : "bg-git-orange"
+                             } rounded-full`}
                             id="btn_github"
                         >
                             <img
                                 className="w-4 h-4"
-                                src="public/github.svg"
+                                src={`${
+                                    isDarkMode
+                                        ? "public/githubDark.svg"
+                                        : "public/github.svg"
+                                }`}
                                 id="iconGit"
                                 alt="GitHub"
                             />
                         </button>
                     </div>
                     <div
-                        className={`flex flex-col md:flex-row w-full gap-6 bg-${
-                            isDarkMode ? "git-orange" : "git-white-20"
+                        className={`flex flex-col md:flex-row w-full gap-6 ${
+                            isDarkMode ? "bg-git-brown-d10 border-git-white border" : "bg-git-white-10"
                         } rounded-2xl p-2`}
                     >
                         <div className="w-full">
-                            <form className="rounded-xl bg-white container-w-gradient-border p-3 h-full w-full shadow-md">
+                            <form className={`rounded-xl ${
+                                isDarkMode ? "bg-git-brown-d20" : "bg-git-white-20"
+                            } container-w-gradient-border p-3 h-full w-full shadow-md`}>
                                 <div className="flex flex-col h-full">
                                     <label
                                         htmlFor="inputText"
-                                        className="block font-medium mb-2 text-gray-700"
+                                        className={`block font-medium mb-2 ${
+                                            isDarkMode ? "text-git-white-10" : "text-gray-700"}`}
                                     >
                                         {inputPromptTitle}
                                     </label>
                                     <textarea
-                                        className="appearance-none border-0 rounded-lg w-full py-2 px-3 bg-gray-50 text-gray-700 leading-tight focus:outline-none focus:shadow-outline shadow-md"
+                                        className={`${
+                                            isDarkMode ? "bg-git-brown-d30" : "appearance-none"
+                                        } border-0 rounded-lg w-full py-2 px-3 ${
+                                            isDarkMode ? "text-git-white-20" : "text-gray-700"
+                                        } leading-tight focus:outline-none focus:shadow-outline ${
+                                            isDarkMode ? "placeholder-git-white-10" : ""
+                                        }`}
                                         id="inputPrompt"
                                         rows={3}
                                         placeholder={inputPromptPlaceholder}
@@ -160,7 +184,9 @@ export default function App() {
                                     <div className="flex items-center justify-end my-3 last:mb-0 space-x-10">
                                         <button
                                             type="button"
-                                            className="cursor-pointer py-2 px-4 bg-git-orange rounded-full shadow-2xl flex flex-row"
+                                            className={`cursor-pointer py-2 px-4 ${
+                                                isDarkMode ? "bg-git-orange-2" : "bg-git-brown"
+                                            } rounded-full shadow-2xl flex flex-row`}
                                             onClick={handleGenerateClick}
                                             disabled={isInputGitEditable}
                                         >
@@ -175,7 +201,9 @@ export default function App() {
                         <div>
                             <div className="flex items-center md:h-full">
                                 <button
-                                    className="flex items-center justify-center  bg-git-orange rounded-full cursor-pointer mx-auto h-8 w-8"
+                                    className={`flex items-center justify-center ${
+                                        isDarkMode ? "bg-git-orange-2" : "bg-git-brown"
+                                    } rounded-full cursor-pointer mx-auto h-8 w-8`}
                                     id="btn_switch"
                                     onClick={handleSwapFields}
                                 >
@@ -189,16 +217,25 @@ export default function App() {
                             </div>
                         </div>
                         <div className="w-full">
-                            <form className="rounded-xl bg-white container-w-gradient-border p-3 h-full w-full shadow-md">
+                            <form className={`rounded-xl ${
+                                isDarkMode ? "bg-git-brown-d20" : "bg-git-white-20"
+                            } container-w-gradient-border p-3 h-full w-full shadow-md`}>
                                 <div className="flex flex-col h-full">
                                     <label
                                         htmlFor="inputText"
-                                        className="block font-medium mb-2 text-gray-700"
+                                        className={`block font-medium mb-2 ${
+                                            isDarkMode ? "text-git-white-10" : "text-gray-700"}`}
                                     >
                                         {inputGitTitle}
                                     </label>
                                     <textarea
-                                        className="appearance-none border-0 rounded-lg w-full py-2 px-3 bg-gray-50 text-gray-700 leading-tight focus:outline-none focus:shadow-outline shadow-md"
+                                        className={`${
+                                            isDarkMode ? "bg-git-brown-d30" : "appearance-none"
+                                        } border-0 rounded-lg w-full py-2 px-3 ${
+                                            isDarkMode ? "text-git-white-20" : "text-gray-700"
+                                        } leading-tight focus:outline-none focus:shadow-outline ${
+                                            isDarkMode ? "placeholder-git-white-10" : ""
+                                        }`}
                                         id="inputGit"
                                         rows={3}
                                         placeholder={inputGitPlaceholder}
@@ -211,7 +248,8 @@ export default function App() {
                                     <div className="flex items-center justify-between my-3 last:mb-0 space-x-10">
                                         <button
                                             type="button"
-                                            className="cursor-pointer py-2 px-4 bg-gray-100 rounded-full shadow-2xl flex flex-row"
+                                            className={`cursor-pointer py-2 px-4 ${
+                                                isDarkMode ? "bg-git-white-10" : "bg-gray-100"} rounded-full shadow-2xl flex flex-row`}
                                         >
                                             <div className="relative text-sm font-semibold font-inter text-white text-center inline-block mx-auto">
                                                 <img
