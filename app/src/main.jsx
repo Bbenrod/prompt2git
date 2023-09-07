@@ -26,8 +26,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 export default function App() {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [isSwitched, setSwitch] = useState(false);
-    const inputPrompt = document.getElementById('inputPrompt');
-    const inputGit = document.getElementById('inputGit');
+    const inputConvert = document.getElementById("inputPrompt");
+    var inputResult = document.getElementById('inputGit');
+
+    const pressTTC = () => {
+        const convert = inputConvert.value;
+        console.log(convert)
+        
+    }
 
     const handleVersionChange = () => {
         // Cambia el estado de dark mode
@@ -42,14 +48,6 @@ export default function App() {
         inputGit.value = '';
         //Cambia el estado del switch
         setSwitch(!isSwitched);
-    };
-
-    const translateTextToCommand = async (text) => {
-        return text.replace(/[aeiouAEIOU]/g, "x");
-    };
-
-    const translateCommandToText = async (command) => {
-        return command.replace(/[aeiouAEIOU]/g, "y");
     };
 
     return (
@@ -155,7 +153,7 @@ export default function App() {
                                             className={`cursor-pointer py-2 px-4 rounded-full shadow-2xl flex flex-row ${
                                                 isDarkMode ? "bg-git-orange-2" : "bg-git-brown"
                                             }`}
-                                            onClick={isSwitched ? {translateCommandToText} : {translateTextToCommand} }
+                                            onClick={pressTTC}
                                         >
                                             <div className="relative text-sm font-semibold font-inter text-white text-center inline-block mx-auto">
                                                 Generar
