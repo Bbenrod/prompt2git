@@ -26,12 +26,32 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 export default function App() {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [isSwitched, setSwitch] = useState(false);
-    const inputConvert = document.getElementById("inputPrompt");
-    var inputResult = document.getElementById('inputGit');
+    const [inputConvert, setInputConvert] = useState();
+    const [inputResult, setInputResult] = useState();
 
-    const pressTTC = () => {
-        const convert = inputConvert.value;
-        console.log(convert)
+    const pressTTC = async () => {
+        const convert = inputConvert;
+        
+        try {
+            const translatedCommand = await translateTextToCommand(convert);
+            setInputResult(translatedCommand);
+            inputGit.value = translatedCommand;
+        } catch (error) {
+            console.log("ERROR INNESPERADO");
+        }
+        
+    }
+
+    const pressCTT = async () => {
+        const convert = inputConvert;
+        
+        try {
+            const translatedCommand = await translateCommandToText(convert);
+            setInputResult(translatedCommand);
+            inputGit.value = translatedCommand;
+        } catch (error) {
+            console.log("ERROR INNESPERADO");
+        }
         
     }
 
@@ -44,11 +64,25 @@ export default function App() {
     };
 
     const switchInputs = () => {
-        inputPrompt.value = '';
+        setInputConvert("");
         inputGit.value = '';
         //Cambia el estado del switch
         setSwitch(!isSwitched);
     };
+
+    const copyToClipboard = () => {
+        const inputGit = document.getElementById('inputGit');
+    
+        // Selecciona el contenido del textarea
+        inputGit.select();
+        inputGit.setSelectionRange(0, 99999); // Para dispositivos móviles
+    
+        // Copia el texto al portapapeles
+        document.execCommand('copy');
+    
+        // Deselecciona el textarea
+        inputGit.setSelectionRange(0, 0);
+    }    
 
     return (
         <div
@@ -146,6 +180,8 @@ export default function App() {
                                         id="inputPrompt"
                                         rows={3}
                                         placeholder={isSwitched ? "Ingresa el comando en git" : "Ingresa tu prompt"}
+                                        value={inputConvert}
+                                        onChange={(e) => setInputConvert(e.target.value)}
                                     />
                                     <div className="flex items-center justify-end my-3 last:mb-0 space-x-10">
                                         <button
@@ -153,7 +189,7 @@ export default function App() {
                                             className={`cursor-pointer py-2 px-4 rounded-full shadow-2xl flex flex-row ${
                                                 isDarkMode ? "bg-git-orange-2" : "bg-git-brown"
                                             }`}
-                                            onClick={pressTTC}
+                                            onClick={isSwitched ? pressCTT : pressTTC}
                                         >
                                             <div className="relative text-sm font-semibold font-inter text-white text-center inline-block mx-auto">
                                                 Generar
@@ -206,6 +242,7 @@ export default function App() {
                                             type="button"
                                             className={`cursor-pointer py-2 px-4 ${
                                                 isDarkMode ? "bg-git-white-10" : "bg-gray-100"} rounded-full shadow-2xl flex flex-row`}
+                                            onClick={copyToClipboard}
                                         >
                                             <div className="relative text-sm font-semibold font-inter text-white text-center inline-block mx-auto">
                                                 <img
