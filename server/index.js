@@ -2,10 +2,11 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const PORT = process.env.PORT || 3000;
+const SERVER_PORT = process.env.SERVER_PORT || 3000;
+const APP_PORT = process.env.APP_PORT || 5173;
 
 const corsOptions = {
-    origin: process.env.URL || `http://localhost:${5173}`, // Cambia esto al dominio real del frontend
+    origin: process.env.URL || `http://localhost:${APP_PORT}`,
     methods: "POST",
 };
 
@@ -29,6 +30,6 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: "Internal server error" });
 });
 
-app.listen(PORT, () => {
-    console.log(`[Server] Server is running on port ${PORT}`);
+app.listen(SERVER_PORT, () => {
+    console.log(`[Server] Server is running on port ${SERVER_PORT}`);
 });

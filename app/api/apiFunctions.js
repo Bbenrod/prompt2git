@@ -14,8 +14,12 @@ export const translateTextToCommand = async (text) => {
 };
 
 export const translateCommandToText = async (command) => {
+    console.log("[api] " + { command });
     try {
-        const response = await axios.post(`/translate/command`, { command });
+        const response = await axios.post(
+            `http://localhost:3000/api/translate/command`,
+            { command }
+        );
         return response.data.body;
     } catch (error) {
         console.error("Error calling API:", error);
