@@ -6,7 +6,7 @@ export const translateTextToCommand = async (text) => {
             `http://localhost:3000/api/translate/text`,
             { text }
         );
-        return response.data;
+        return response.data.body;
     } catch (error) {
         console.error("Error calling API:", error);
         throw error;
@@ -16,7 +16,7 @@ export const translateTextToCommand = async (text) => {
 export const translateCommandToText = async (command) => {
     try {
         const response = await axios.post(`/translate/command`, { command });
-        return response.data;
+        return response.data.body;
     } catch (error) {
         console.error("Error calling API:", error);
         throw error;

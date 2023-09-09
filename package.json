@@ -9,9 +9,14 @@
   "scripts": {
     "prepare": "cd server && npm install && cd ../app && npm install ",
     "start": "npm run start:both",
-    "start:both": "concurrently \"npm run start:server\" \"npm run start:frontend\"",
+    "start:both": "concurrently \"npm run start:server\" \"npm run start:app\"",
     "start:server": "cd server && npm start",
+    "dev": "npm run dev:both",
+    "dev:both": "concurrently \"npm run dev:server\" \"npm run dev:app\"",
     "dev:app": "cd app && npm run dev",
     "dev:server": "cd server && npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.1"
   }
 }
