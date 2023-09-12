@@ -11,6 +11,7 @@
     "start": "npm run start:both",
     "start:both": "concurrently \"npm run start:server\" \"npm run start:app\"",
     "start:server": "cd server && npm start",
+    "start:app": "cd app && npm run dev",
     "dev": "npm run dev:both",
     "dev:both": "concurrently \"npm run dev:server\" \"npm run dev:app\"",
     "dev:app": "cd app && npm run dev",

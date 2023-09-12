@@ -1,15 +1,19 @@
-require("dotenv").config({ path: "../.env" });
-const { Configuration, OpenAIApi } = require("openai");
+import { Configuration, OpenAIApi } from "openai";
 
-if (!process.env.OPENAI_API_KEY) {
+const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+const OPENAI_API_ORGANIZATION = import.meta.env.VITE_OPENAI_API_ORGANIZATION;
+
+if (!OPENAI_API_KEY) {
     throw new Error(
         "[openai] OPENAI_API_KEY is not defined in .env file. Please add it there."
     );
 }
 
+console.log(import.meta.env);
+
 const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-    organization: process.env.OPENAI_API_ORGANIZATION,
+    apiKey: OPENAI_API_KEY,
+    organization: OPENAI_API_ORGANIZATION,
 });
 const openai = new OpenAIApi(configuration);
 
@@ -34,4 +38,4 @@ const generate_text = async (prompt) => {
     }
 };
 
-module.exports = { generate_text };
+export { generate_text };
