@@ -6,6 +6,15 @@ import {
     translateTextToCommand,
 } from "../api/apiFunctions";
 
+import sunIcon from "./assets/sun.svg";
+import moonIcon from "./assets/moon.svg";
+import coffeeIcon from "./assets/coffee.svg";
+import coffeeDarkIcon from "./assets/coffeeDark.svg";
+import githubIcon from "./assets/github.svg";
+import githubDarkIcon from "./assets/githubDark.svg";
+import switchIcon from "./assets/switch.svg";
+import copyIcon from "./assets/copy.svg";
+
 function openUrl(url) {
     window.open(url, "_blank"); // Abre la URL en una nueva ventana o pestaña
 }
@@ -124,11 +133,7 @@ export default function App() {
                         >
                             <img
                                 className="w-4 h-4"
-                                src={`${
-                                    isDarkMode
-                                        ? "public/sun.svg"
-                                        : "public/moon.svg"
-                                }`}
+                                src={`${isDarkMode ? sunIcon : moonIcon}`}
                                 id="iconMode"
                                 alt={isDarkMode ? "Light" : "Dark"}
                             />
@@ -145,9 +150,7 @@ export default function App() {
                             <img
                                 className="w-4 h-4"
                                 src={`${
-                                    isDarkMode
-                                        ? "public/coffeeDark.svg"
-                                        : "public/coffee.svg"
+                                    isDarkMode ? coffeeDarkIcon : coffeeIcon
                                 }`}
                                 id="iconCoffee"
                                 alt="Coffee"
@@ -165,9 +168,7 @@ export default function App() {
                             <img
                                 className="w-4 h-4"
                                 src={`${
-                                    isDarkMode
-                                        ? "public/githubDark.svg"
-                                        : "public/github.svg"
+                                    isDarkMode ? githubDarkIcon : githubIcon
                                 }`}
                                 id="iconGit"
                                 alt="GitHub"
@@ -250,7 +251,7 @@ export default function App() {
                                     onClick={switchInputs}
                                 >
                                     <img
-                                        src="public/switch.svg"
+                                        src={switchIcon}
                                         alt="Switch"
                                         className="w-4 h-4 md:w-4 md:h-4"
                                         id="iconSwitch"
@@ -304,7 +305,7 @@ export default function App() {
                                             <div className="relative text-sm font-semibold font-inter text-white text-center inline-block mx-auto">
                                                 <img
                                                     className="h-5 w-5"
-                                                    src="public/copy.svg"
+                                                    src={copyIcon}
                                                     alt="Copy"
                                                     id="iconCopy"
                                                 />
