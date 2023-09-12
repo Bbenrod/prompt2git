@@ -9,8 +9,6 @@ if (!OPENAI_API_KEY) {
     );
 }
 
-console.log(import.meta.env);
-
 const configuration = new Configuration({
     apiKey: OPENAI_API_KEY,
     organization: OPENAI_API_ORGANIZATION,
