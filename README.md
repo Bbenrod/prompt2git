@@ -6,19 +6,21 @@
 
 ✅ **Solutions:** With Promt2Git, you can type in natural language what you want to do and instantly receive a Git command to copy. Have you ever seen a Git command and wondered what it does? Just ask your translator, Promt2Git!
 
-📄 **Sample Prompts and Commands:**
+🔗 **Website URL:** [https://www.prompt2git.dev/]
 
-| Prompt                                       | Command             |
-| -------------------------------------------- | ------------------- |
-| Undo the last commit but keep the changes.   | `git reset HEAD~1` |
-| Switch to the production branch.             | `git checkout production` |
+## 📄 **Sample Prompts and Commands**
 
-🌟 **Features:**
-- Dark Mode
-- Translation from natural language to Git
-- Translation from Git to natural language
+| Prompt                                     | Command                   |
+| ------------------------------------------ | ------------------------- |
+| Undo the last commit but keep the changes. | `git reset HEAD~1`        |
+| Switch to the production branch.           | `git checkout production` |
 
-🛠️ **Roadmap:**
-- [ ]  (Coming Soon)
+## 🌟 **Features**
 
-🔗 **Website URL:** [https://www.prompt2git.dev/](#)
+-   Dark Mode
+-   Translation from natural language to Git
+-   Translation from Git to natural language
+
+## 🛠️ **Roadmap**
+
+-   [ ] (Coming Soon)
