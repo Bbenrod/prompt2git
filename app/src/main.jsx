@@ -87,9 +87,6 @@ export default function App() {
     const copyToClipboard = () => {
         const inputGit = document.getElementById("inputGit");
 
-        // Guarda el estado de edición actual del textarea
-        const wasReadOnly = inputGit.readOnly;
-
         // Deshabilita la edición del textarea temporalmente
         inputGit.readOnly = true;
 
@@ -102,9 +99,6 @@ export default function App() {
 
         // Deselecciona el textarea
         inputGit.setSelectionRange(0, 0);
-
-        // Restaura el estado de edición del textarea
-        inputGit.readOnly = wasReadOnly;
     };
 
     return (
@@ -201,7 +195,7 @@ export default function App() {
                                         {isSwitched ? "Git" : "Prompt"}
                                     </label>
                                     <textarea
-                                        className={`border-0 rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ${isDarkMode
+                                        className={`border-0 rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline resize-none ${isDarkMode
                                                 ? "placeholder-git-white-10 bg-git-brown-d30 text-git-white-20"
                                                 : "appearance-none text-gray-700"
                                             }`}
@@ -273,7 +267,7 @@ export default function App() {
                                         {isSwitched ? "Prompt" : "Git"}
                                     </label>
                                     <textarea
-                                        className={`border-0 rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline pointer-events-none ${isDarkMode
+                                        className={`border-0 rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline pointer-events-none resize-none ${isDarkMode
                                                 ? "placeholder-git-white-10 bg-git-brown-d30 text-git-white-20"
                                                 : "appearance-none text-gray-700"
                                             }`}
