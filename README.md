@@ -23,8 +23,8 @@
 
 ## 🛠️ **Roadmap**
 
--   [ ] 📋 Improved example prompts
--   [ ] ⏳ Added a loader for each request
--   [ ] 📜 Enhanced historical tracking
--   [ ] 🧩 Separated responses for multiple commands
+-   [ ] 📋 Add example prompts
+-   [ ] ⏳ Add a loader for each request
+-   [ ] 📜 Create Historical tracking
+-   [ ] 🧩 Separate responses for multiple commands
 -   [ ] 🖊️ Edit values within the outputs
