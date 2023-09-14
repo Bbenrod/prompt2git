@@ -40,7 +40,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 );
 
 export default function App() {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(true);
     const [isSwitched, setSwitch] = useState(false);
     const [inputConvert, setInputConvert] = useState();
     const [inputResult, setInputResult] = useState();
