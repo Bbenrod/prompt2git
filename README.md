@@ -23,4 +23,8 @@
 
 ## 🛠️ **Roadmap**
 
--   [ ] (Coming Soon)
+-   [ ] 📋 Improved example prompts
+-   [ ] ⏳ Added a loader for each request
+-   [ ] 📜 Enhanced historical tracking
+-   [ ] 🧩 Separated responses for multiple commands
+-   [ ] 🖊️ Edit values within the outputs
